@@ -8,40 +8,80 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
+        body {
+            color: #333333;
+            background-color: #FFFFFF;
+        }
+        .navbar {
+            background-color: #FFFFFF !important;
+            border-bottom: 2px solid #B23A48;
+        }
+        .navbar-brand {
+            color: #B23A48 !important;
+            font-weight: bold;
+        }
+        .navbar-brand:hover {
+            color: #B23A48 !important;
+        }
+        .nav-link {
+            color: #333333 !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #B23A48 !important;
+        }
+        .nav-link.active {
+            color: #B23A48 !important;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #F2C14E;
+            border-color: #F2C14E;
+            color: #333333;
+            font-weight: 500;
+        }
+        .btn-primary:hover {
+            background-color: #E6B040;
+            border-color: #E6B040;
+            color: #333333;
+        }
         .reservation-title {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
             margin-bottom: 40px;
-            color: #212529;
+            color: #B23A48;
         }
         .reservation-form {
             max-width: 600px;
             margin: 0 auto;
-            background-color: white;
+            background-color: #FFFFFF;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(178, 58, 72, 0.1);
+            border: 1px solid #f0f0f0;
         }
         .form-label {
             font-weight: 500;
-            color: #495057;
+            color: #333333;
             margin-bottom: 8px;
         }
         .form-control {
-            border: 1px solid #dee2e6;
+            border: 1px solid #B23A48;
             border-radius: 5px;
             padding: 10px;
             margin-bottom: 20px;
+            color: #333333;
         }
         .form-control:focus {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+            border-color: #B23A48;
+            box-shadow: 0 0 0 0.2rem rgba(178, 58, 72, 0.25);
+            outline: none;
         }
         .btn-reservar {
-            background-color: #495057;
+            background-color: #F2C14E;
             border: none;
-            color: white;
+            color: #333333;
             padding: 12px 40px;
             border-radius: 5px;
             font-weight: 500;
@@ -50,14 +90,21 @@
             transition: background-color 0.3s;
         }
         .btn-reservar:hover {
-            background-color: #343a40;
-            color: white;
+            background-color: #E6B040;
+            color: #333333;
+        }
+        footer {
+            background-color: #f8f8f8;
+            border-top: 2px solid #B23A48;
+        }
+        footer p {
+            color: #333333;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="home.html">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,7 +175,7 @@
         </section>
     </main>
 
-    <footer class="bg-light py-4">
+    <footer class="py-4">
         <div class="container">
             <p class="text-muted mb-0 text-start">©2025 Tu Comida Tipica</p>
         </div>
