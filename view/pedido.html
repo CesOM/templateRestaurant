@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservas - Tu Comida Tipica</title>
+    <title>Haz Tu Pedido - Tu Comida Tipica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        .reservation-title {
+        .order-title {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
             margin-bottom: 40px;
             color: #212529;
         }
-        .reservation-form {
+        .order-form {
             max-width: 600px;
             margin: 0 auto;
             background-color: white;
@@ -38,7 +38,11 @@
             border-color: #0d6efd;
             box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
         }
-        .btn-reservar {
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .btn-enviar {
             background-color: #495057;
             border: none;
             color: white;
@@ -49,9 +53,12 @@
             width: 100%;
             transition: background-color 0.3s;
         }
-        .btn-reservar:hover {
+        .btn-enviar:hover {
             background-color: #343a40;
             color: white;
+        }
+        select.form-control {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -72,10 +79,10 @@
                             <a class="nav-link" href="menu.html">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="reserva.html">Reservas</a>
+                            <a class="nav-link" href="reserva.html">Reservas</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pedido.html" class="btn btn-primary ms-2">Pedido</a>
+                            <a class="nav-link active" href="pedido.html">Pedido</a>
                         </li>
                     </ul>
                 </div>
@@ -86,9 +93,9 @@
     <main>
         <section class="py-5">
             <div class="container">
-                <h1 class="reservation-title">Reservas</h1>
+                <h1 class="order-title">Haz Tu Pedido</h1>
                 
-                <form class="reservation-form">
+                <form class="order-form">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -105,23 +112,47 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="numeroPersonas" class="form-label">Numero de Personas</label>
-                        <input type="number" class="form-control" id="numeroPersonas" name="numeroPersonas" min="1" required>
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="fecha" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="hora" class="form-label">Hora</label>
-                            <input type="time" class="form-control" id="hora" name="hora" required>
-                        </div>
+                    <div class="mb-3">
+                        <label for="plato" class="form-label">Seleccione el plato</label>
+                        <select class="form-control" id="plato" name="plato" required>
+                            <option value="">-- Seleccione un plato --</option>
+                            <optgroup label="Desayunos">
+                                <option value="arepa-huevo">Arepa de Huevo</option>
+                                <option value="huevos-pericos">Huevos Pericos</option>
+                                <option value="calentado">Calentado Paisa</option>
+                            </optgroup>
+                            <optgroup label="Almuerzos">
+                                <option value="bandeja-paisa">Bandeja Paisa</option>
+                                <option value="arroz-coco">Arroz de Coco con Pescado</option>
+                                <option value="ajiaco">Ajiaco Santafereño</option>
+                                <option value="sancocho">Sancocho de Pollo</option>
+                                <option value="lechona">Lechona Tolimense</option>
+                            </optgroup>
+                            <optgroup label="Bebidas">
+                                <option value="jugo-natural">Jugo Natural</option>
+                                <option value="limonada">Limonada de Coco</option>
+                                <option value="refresco">Refresco</option>
+                                <option value="agua">Agua</option>
+                            </optgroup>
+                            <optgroup label="Postres">
+                                <option value="tres-leches">Tres Leches</option>
+                                <option value="flan">Flan de Coco</option>
+                                <option value="dulce">Dulce de Leche</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="comentarios" class="form-label">Comentarios</label>
+                        <textarea class="form-control" id="comentarios" name="comentarios" rows="4" placeholder="Ingrese comentarios adicionales sobre su pedido..."></textarea>
                     </div>
 
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-reservar">Reservar</button>
+                        <button type="submit" class="btn btn-enviar">Enviar Pedido</button>
                     </div>
                 </form>
             </div>
@@ -136,11 +167,11 @@
 
     <script>
         // Validación del formulario
-        document.querySelector('.reservation-form').addEventListener('submit', function(e) {
+        document.querySelector('.order-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Aquí puedes agregar la lógica para enviar la reserva
-            alert('¡Reserva enviada con éxito! Nos pondremos en contacto contigo pronto.');
+            // Aquí puedes agregar la lógica para enviar el pedido
+            alert('¡Pedido enviado con éxito! Te contactaremos pronto para confirmar tu pedido.');
             this.reset();
         });
     </script>
