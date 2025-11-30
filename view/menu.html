@@ -8,6 +8,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
+        body {
+            color: #333333;
+            background-color: #FFFFFF;
+        }
+        .navbar {
+            background-color: #FFFFFF !important;
+            border-bottom: 2px solid #B23A48;
+        }
+        .navbar-brand {
+            color: #B23A48 !important;
+            font-weight: bold;
+        }
+        .navbar-brand:hover {
+            color: #B23A48 !important;
+        }
+        .nav-link {
+            color: #333333 !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #B23A48 !important;
+        }
+        .nav-link.active {
+            color: #B23A48 !important;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #F2C14E;
+            border-color: #F2C14E;
+            color: #333333;
+            font-weight: 500;
+        }
+        .btn-primary:hover {
+            background-color: #E6B040;
+            border-color: #E6B040;
+            color: #333333;
+        }
         .category-tabs {
             display: flex;
             justify-content: center;
@@ -18,39 +55,41 @@
         .category-tab {
             padding: 10px 20px;
             background-color: transparent;
-            border: 2px solid #dee2e6;
+            border: 2px solid #B23A48;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
-            color: #495057;
+            color: #333333;
         }
         .category-tab:hover {
-            background-color: #e9ecef;
-            border-color: #adb5bd;
+            background-color: #F2C14E;
+            border-color: #F2C14E;
+            color: #333333;
         }
         .category-tab.active {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-            color: white;
+            background-color: #B23A48;
+            border-color: #B23A48;
+            color: #FFFFFF;
         }
         .product-card {
-            background-color: white;
+            background-color: #FFFFFF;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(178, 58, 72, 0.1);
             margin-bottom: 30px;
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
+            border: 1px solid #f0f0f0;
         }
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(178, 58, 72, 0.2);
         }
         .product-image {
             width: 100%;
             height: 200px;
-            background-color: #e9ecef;
+            background-color: #f8f8f8;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,18 +102,19 @@
         }
         .product-image-placeholder {
             font-size: 64px;
-            color: #adb5bd;
+            color: #B23A48;
+            opacity: 0.3;
         }
         .product-body {
             padding: 20px;
         }
         .product-description {
-            color: #495057;
+            color: #333333;
             margin-bottom: 15px;
             min-height: 48px;
         }
         .product-description-line {
-            background-color: #495057;
+            background-color: #333333;
             height: 10px;
             border-radius: 2px;
             margin-bottom: 8px;
@@ -89,29 +129,29 @@
         .product-price {
             font-size: 1.25rem;
             font-weight: bold;
-            color: #212529;
+            color: #4CAF50;
             margin-bottom: 15px;
         }
         .btn-ver-mas {
             width: 100%;
-            background-color: #495057;
+            background-color: #F2C14E;
             border: none;
-            color: white;
+            color: #333333;
             padding: 10px;
             border-radius: 5px;
             font-weight: 500;
             transition: background-color 0.3s;
         }
         .btn-ver-mas:hover {
-            background-color: #343a40;
-            color: white;
+            background-color: #E6B040;
+            color: #333333;
         }
         .menu-title {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
             margin-bottom: 40px;
-            color: #212529;
+            color: #B23A48;
         }
         .category-content {
             display: none;
@@ -119,11 +159,18 @@
         .category-content.active {
             display: block;
         }
+        footer {
+            background-color: #f8f8f8;
+            border-top: 2px solid #B23A48;
+        }
+        footer p {
+            color: #333333;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="home.html">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -794,7 +841,7 @@
         </section>
     </main>
 
-    <footer class="bg-light py-4">
+    <footer class="py-4">
         <div class="container">
             <p class="text-muted mb-0 text-start">©2025 Tu Comida Tipica</p>
         </div>
