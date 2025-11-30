@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Tu Comida Tipica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .category-tab {
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #495057;
+        }
+        .category-tab:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        .category-tab.active {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            color: white;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-image-placeholder {
+            font-size: 64px;
+            color: #adb5bd;
+        }
+        .product-body {
+            padding: 20px;
+        }
+        .product-description {
+            color: #495057;
+            margin-bottom: 15px;
+            min-height: 48px;
+        }
+        .product-description-line {
+            background-color: #495057;
+            height: 10px;
+            border-radius: 2px;
+            margin-bottom: 8px;
+        }
+        .product-description-line:first-child {
+            width: 90%;
+        }
+        .product-description-line:last-child {
+            width: 75%;
+            margin-bottom: 0;
+        }
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #212529;
+            margin-bottom: 15px;
+        }
+        .btn-ver-mas {
+            width: 100%;
+            background-color: #495057;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .btn-ver-mas:hover {
+            background-color: #343a40;
+            color: white;
+        }
+        .menu-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #212529;
+        }
+        .category-content {
+            display: none;
+        }
+        .category-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="home.html">Logo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-primary ms-2">Pedido</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <h1 class="menu-title">Menú</h1>
+                
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="desayunos">Desayunos</button>
+                    <button class="category-tab" data-category="almuerzos">Almuerzos</button>
+                    <button class="category-tab" data-category="bebidas">Bebidas</button>
+                    <button class="category-tab" data-category="postres">Postres</button>
+                </div>
+
+                <!-- Desayunos -->
+                <div class="category-content active" id="desayunos">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="../images/arepaHuevo.jpg" alt="Producto">
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Almuerzos -->
+                <div class="category-content" id="almuerzos">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="../images/bandeja-paisa-1616.gif" alt="Bandeja Paisa">
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="../images/arroz_coco.jpg" alt="Arroz de Coco">
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bebidas -->
+                <div class="category-content" id="bebidas">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postres -->
+                <div class="category-content" id="postres">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div class="product-image-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <div class="product-description">
+                                        <div class="product-description-line"></div>
+                                        <div class="product-description-line"></div>
+                                    </div>
+                                    <div class="product-price">$----------</div>
+                                    <button class="btn btn-ver-mas">Ver mas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light py-4">
+        <div class="container">
+            <p class="text-muted mb-0 text-start">©2025 Tu Comida Tipica</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad para cambiar entre categorías
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const categoryContents = document.querySelectorAll('.category-content');
+
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetCategory = this.getAttribute('data-category');
+
+                    // Remover clase active de todos los tabs y contenidos
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    categoryContents.forEach(c => c.classList.remove('active'));
+
+                    // Agregar clase active al tab y contenido seleccionado
+                    this.classList.add('active');
+                    document.getElementById(targetCategory).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
